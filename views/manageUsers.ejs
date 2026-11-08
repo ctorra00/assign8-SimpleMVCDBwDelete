@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manage Users</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar bg-body-tertiary mb-4">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">User Management</span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Manage Users</h2>
+            <a href="/users/new" class="btn btn-primary">Add New User</a>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>User Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% users.forEach(function (user) { %>
+                    <tr>
+                        <td><%= user.userID %></td>
+                        <td><%= user.fname %></td>
+                        <td><%= user.lname %></td>
+                        <td><%= user.username %></td>
+                        <td>
+                            <form action="/users/<%= user.userID %>/delete"
+                                  method="POST"
+                                  style="display:inline;"
+                                  onsubmit="return confirm('Are you sure you want to delete this user?');">
+
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
